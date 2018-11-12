@@ -19,3 +19,17 @@ If you discover a security vulnerability within Lumen, please send an e-mail to 
 ## License
 
 The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+
+## Start the app locally
+create database `laravel_lumen`
+
+######ENV
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel_lumen
+DB_USERNAME=your_db_username
+DB_PASSWORD=your_db_password
+
+php -S localhost 8000 -t public
+
