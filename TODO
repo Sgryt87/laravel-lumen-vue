@@ -6,3 +6,10 @@ php artisan make:migration create_boards_table --create=boards
 enable elouquent & facades in bootstrap/app.php
  $app->withEloquent();
  $app->withFacades();
+
+
+authentication (uncomment in bootstrap app.php)
+ $app->routeMiddleware([
+     'auth' => App\Http\Middleware\Authenticate::class,
+ ]);
+ $app->register(App\Providers\AuthServiceProvider::class);
