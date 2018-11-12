@@ -1,0 +1,8 @@
+php -S localhost 8000 -t public
+
+php artisan make:migration create_users_table --create=users
+php artisan make:migration create_boards_table --create=boards
+
+enable elouquent & facades in bootstrap/app.php
+ $app->withEloquent();
+ $app->withFacades();
