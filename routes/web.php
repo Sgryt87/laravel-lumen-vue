@@ -25,3 +25,19 @@ $router->get('/boards', 'BoardController@index');
 $router->get('/boards/{board}', 'BoardController@show');
 $router->post('/boards', 'BoardController@store');
 
+//LIST CRUD
+$router->get('/boards/{board}/list', 'ListController@index');
+$router->post('/boards/{board}/list', 'ListController@store');
+$router->get('/boards/{board}/list/{list}', 'ListController@show');
+$router->put('/boards/{board}/list/{list}', 'ListController@update');
+$router->delete('/boards/{board}/list/{list}', 'ListController@destroy');
+
+//CARD CRUD
+$router->get('/boards/{board}/list/{list}/card', 'CardController@index');
+$router->post('/boards/{board}/list/{list}/card', 'CardController@store');
+$router->get('/boards/{board}/list/{list}/card/{card}', 'CardController@show');
+$router->put('/boards/{board}/list/{list}/card/{card}', 'CardController@update');
+$router->delete('/boards/{board}/list/{list}/card/{card}', 'CardController@destroy');
+
+
+//DISCARD CONTROLLER

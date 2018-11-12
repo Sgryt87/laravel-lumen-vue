@@ -5,8 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Board extends Model
+class Card extends Model
 {
+    protected $table = 'cards';
+    protected $fillable = ['name', 'list_id', 'description'];
 
     /**
      * The attributes that are mass assignable.
@@ -15,14 +17,8 @@ class Board extends Model
      */
     protected $guarded = [];
 
-    public function user()
+    public function list()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Lists::class);
     }
-
-    public function lists()
-    {
-        return $this->hasMany(Lists::class);
-    }
-
 }

@@ -28,7 +28,7 @@ class BoardController extends Controller
 
     public function show($id)
     {
-        $board = Board::findOrFail($id);
+        $board = Board::find($id);
 
         if (Auth::user()->id !== $board->user_id) {
             return response()->json([
@@ -48,7 +48,7 @@ class BoardController extends Controller
                 'name' => $request->name
             ]);
 
-        return response()->json(['message' => 'success'], 200);
+        return response()->json(['status' => 'success'], 200);
     }
 
     public function update(Request $request, $id)
@@ -64,8 +64,8 @@ class BoardController extends Controller
         $board->update($request->all());
 
         return response()->json([
-            'message' => 'success',
-            'board'   => $board
+            'status' => 'success',
+            'message'   => $board
         ], 200);
     }
 
@@ -83,7 +83,7 @@ class BoardController extends Controller
         if (Board::destroy($id)) {
             return response()->json([
                 'status'  => 'success',
-                'message' => 'Deleted Successfully'
+                'message' => 'Board Deleted Successfully'
             ], 204);
         }
 
