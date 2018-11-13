@@ -30,7 +30,7 @@ class AuthController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'user'   => $user
+            'data'   => $user
         ], 200);
     }
 
@@ -41,14 +41,14 @@ class AuthController extends Controller
         if ( ! $user) {
             return response()->json([
                 'status'  => 'error',
-                'message' => 'Invalid credentials'
+                'data' => 'Invalid credentials'
             ], 401);
         }
 
         if ( ! Hash::check($request->password, $user->password)) {
             return response()->json([
                 'status'  => 'error',
-                'message' => 'Invalid credentials'
+                'data' => 'Invalid credentials'
             ], 401);
         }
 
@@ -56,7 +56,7 @@ class AuthController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'user'   => $user
+            'data'   => $user
         ], 200);
     }
 
@@ -68,7 +68,7 @@ class AuthController extends Controller
         if ( ! $user) {
             return response()->json([
                 'status'  => 'error',
-                'message' => 'Not Logged In'
+                'data' => 'Not Logged In'
             ], 401);
         }
 
@@ -77,7 +77,7 @@ class AuthController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'Logged out successfully'
+            'data' => 'Logged out successfully'
         ], 200);
     }
 }

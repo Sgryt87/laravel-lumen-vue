@@ -5,28 +5,29 @@
             <v-flex xs6 offset-xs3>
                 <v-card>
                     <v-card-text>
+                        <form @keyup.enter="_register">
                         <v-text-field
                                 v-model="register.username"
-                                label="Username"
+                                label="Username*"
                                 required
                         >
                         </v-text-field>
 
                         <v-text-field
                                 v-model="register.email"
-                                label="Email"
+                                label="Email*"
                                 required
                         >
                         </v-text-field>
 
                         <v-text-field
                                 v-model="register.password"
-                                label="Password"
+                                label="Password*"
                                 type="password"
                                 required
-
                         >
                         </v-text-field>
+                        </form>
                     </v-card-text>
 
                     <v-btn class="mb-3" success @click='_register'>Register</v-btn>
@@ -54,11 +55,13 @@
         },
         methods: {
             _register() {
-                axios.post('http://localhost:8000', this.register)
+                axios.post('register', this.register)
                     .then(response => {
-                        let token = response.data.user.api_token;
-                        localStorage.setItem('token', token);
-                    });
+                        console.log(response.data.data)
+                        localStorage.setItem('token', response.data.data.api_token)
+                        this.$router.push('/')
+                    })
+                    .catch(error => console.log(`Error: ${error}`))
             }
         }
     }

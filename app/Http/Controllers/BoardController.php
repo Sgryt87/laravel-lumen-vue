@@ -23,7 +23,12 @@ class BoardController extends Controller
 
     public function index()
     {
-        return Auth::user()->boards;
+        $boards = Auth::user()->boards;
+
+        return response()->json([
+            'status' => 'success',
+            'data'   => $boards
+        ], 200);
     }
 
     public function show($id)
@@ -32,8 +37,8 @@ class BoardController extends Controller
 
         if (Auth::user()->id !== $board->user_id) {
             return response()->json([
-                'status'  => 'error',
-                'message' => 'Unauthorized'
+                'status' => 'error',
+                'data'   => 'Unauthorized'
             ], 403);
         }
 
@@ -48,7 +53,9 @@ class BoardController extends Controller
                 'name' => $request->name
             ]);
 
-        return response()->json(['status' => 'success'], 200);
+        return response()->json([
+            'status' => 'success'
+        ], 200);
     }
 
     public function update(Request $request, $id)
@@ -57,15 +64,15 @@ class BoardController extends Controller
 
         if (Auth::user()->id !== $board->user_id) {
             return response()->json([
-                'status'  => 'error',
-                'message' => 'Unauthorized'
+                'status' => 'error',
+                'data'   => 'Unauthorized'
             ], 403);
         }
         $board->update($request->all());
 
         return response()->json([
             'status' => 'success',
-            'message'   => $board
+            'data'   => $board
         ], 200);
     }
 
@@ -75,21 +82,21 @@ class BoardController extends Controller
 
         if (Auth::user()->id !== $board->user_id) {
             return response()->json([
-                'status'  => 'error',
-                'message' => 'Unauthorized'
+                'status' => 'error',
+                'data'   => 'Unauthorized'
             ], 403);
         }
 
         if (Board::destroy($id)) {
             return response()->json([
-                'status'  => 'success',
-                'message' => 'Board Deleted Successfully'
+                'status' => 'success',
+                'data'   => 'Board Deleted Successfully'
             ], 204);
         }
 
         return response()->json([
-            'status'  => 'error',
-            'message' => 'Something went wrong...'
+            'status' => 'error',
+            'data'   => 'Something went wrong...'
         ], 500);
     }
 }

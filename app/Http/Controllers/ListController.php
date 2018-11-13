@@ -26,14 +26,15 @@ class ListController extends Controller
 
         if (Auth::user()->id !== $board->user_id) {
             return response()->json([
-                'status'  => 'error',
-                'message' => 'Unauthorized'
+                'status' => 'error',
+                'data'   => 'Unauthorized'
             ], 403);
         }
 
         return response()->json([
-            'message' => $board->lists
-        ]);
+            'status' => 'success',
+            'data'   => $board->lists
+        ], 200);
     }
 
     public function show($boardId, $listId)
@@ -42,16 +43,16 @@ class ListController extends Controller
 
         if (Auth::user()->id !== $board->user_id) {
             return response()->json([
-                'status'  => 'error',
-                'message' => 'Unauthorized'
+                'status' => 'error',
+                'data'   => 'Unauthorized'
             ], 403);
         }
 
         $list = $board->lists()->find($listId);
 
         return response()->json([
-            'status'  => 'success',
-            'message' => $list
+            'status' => 'success',
+            'data'   => $list
         ], 200);
     }
 
@@ -64,8 +65,8 @@ class ListController extends Controller
 
         if (Auth::user()->id !== $board->user_id) {
             return response()->json([
-                'status'  => 'error',
-                'message' => 'Unauthorized'
+                'status' => 'error',
+                'data'   => 'Unauthorized'
             ], 403);
         }
 
@@ -73,7 +74,9 @@ class ListController extends Controller
             'name' => $request->name
         ]);
 
-        return response()->json(['message' => 'success'], 200);
+        return response()->json([
+            'status' => 'success'
+        ], 200);
     }
 
     public function update(Request $request, $boardId, $listId)
@@ -85,14 +88,14 @@ class ListController extends Controller
         if (Auth::user()->id !== $board->user_id) {
             return response()->json([
                 'status'  => 'error',
-                'message' => 'Unauthorized'
+                'data' => 'Unauthorized'
             ], 403);
         }
         $board->update($request->all());
 
         return response()->json([
             'status'  => 'success',
-            'message' => $board
+            'data' => $board
         ], 200);
     }
 
@@ -103,7 +106,7 @@ class ListController extends Controller
         if (Auth::user()->id !== $board->user_id) {
             return response()->json([
                 'status'  => 'error',
-                'message' => 'Unauthorized'
+                'data' => 'Unauthorized'
             ], 403);
         }
 
@@ -112,13 +115,13 @@ class ListController extends Controller
         if ($list->delete()) {
             return response()->json([
                 'status'  => 'success',
-                'message' => 'List Deleted Successfully'
+                'data' => 'List Deleted Successfully'
             ], 204);
         }
 
         return response()->json([
             'status'  => 'error',
-            'message' => 'Something went wrong...'
+            'data' => 'Something went wrong...'
         ], 500);
     }
 }

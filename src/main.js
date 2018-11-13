@@ -10,7 +10,6 @@ import 'vuetify/dist/vuetify.min.css'
 import 'vuetify/dist/vuetify.min'
 
 window.token = localStorage.getItem('token');
-
 window.axios = axios
 window.axios.defaults.baseURL = 'http://localhost:8000'
 window.axios.defaults.params = {api_token: window.token}
